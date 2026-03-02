@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FlowLink | Secure Peer Support</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- AUTHENTICATION VIEW -->
+  <div id="auth-view" class="view active">
+    <div class="auth-container">
+      <div class="logo-circle">
+        <!-- SVG Shield Icon placeholder -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="primary-icon">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      </div>
+      <h1 class="brand-title">FlowLink</h1>
+      <p class="subtitle">Secure, discreet, and private.<br />Women-only peer-to-peer support.</p>
+
+      <div class="card login-card">
+        <h2>Join the Community</h2>
+        <button id="login-btn" class="btn btn-outline btn-full margin-top-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            style="margin-right:8px;">
+            <circle cx="12" cy="8" r="5" />
+            <path d="M20 21a8 8 0 0 0-16 0" />
+          </svg>
+          Continue with College Email
+        </button>
+        <p class="disclaimer">Your identity is never visible to others. We generate a fresh alias for your safety.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="dashboard-view" class="view">
+    <header class="app-header">
+      <div class="header-content">
+        <h2 class="header-title">FlowLink</h2>
+        <div class="user-badge" id="user-alias-display">Alias</div>
+        <button id="logout-btn" class="btn btn-text btn-sm">Exit</button>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+
+      <!-- QUICK REQUEST CARD -->
+      <section class="card request-card" id="request-form-section">
+        <h3>Need help right now?</h3>
+        <p class="muted-text">Send a discreet request. Only verified users nearby will see it.</p>
+
+        <form id="new-req-form">
+          <div class="input-group">
+            <label class="input-label">Location (Building/Floor/Room)</label>
+            <input type="text" id="req-location" class="input-field" placeholder="e.g., Library 2nd Floor Restroom"
+              required autocomplete="off">
+          </div>
+
+          <div class="input-group row-group">
+            <div class="flex-1">
+              <label class="input-label">Pad Type</label>
+              <select id="req-type" class="select-field">
+                <option value="Any">Any</option>
+                <option value="Regular">Regular</option>
+
+                <option value="Thin">Thin</option>
+              </select>
+            </div>
+            <div class="flex-1">
+              <label class="input-label">Urgency</label>
+              <select id="req-urgency" class="select-field">
+                <option value="Urgent">Urgent - Now</option>
+                <option value="Standard">Can wait 30m</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-emergency btn-full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              style="margin-right:8px;">
+              <path d="M10 21v-4a2 2 0 0 1 4 0v4" />
+              <path d="m14 2 2.6 1.4A2 2 0 0 1 18 5.2V16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5.2a2 2 0 0 1 1.4-1.8L10 2" />
+            </svg>
+            I Need a Pad
+          </button>
+        </form>
+      </section>
+
+      <!-- I CAN HELP TOGGLE (Moved to Feed or kept as a setting) -->
+      <!-- Keeping the toggle simple and just removing the feed from the dashboard -->
+
+    </main>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" id="nav-dash-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" id="nav-feed-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 18a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2" />
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <circle cx="12" cy="10" r="2" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+        </svg>
+        <span>Live Feed</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- FEED VIEW -->
+  <div id="feed-view" class="view">
+    <header class="app-header">
+      <div class="header-content">
+        <h2 class="header-title">Live Requests</h2>
+        <div class="help-toggle-mini">
+         
+          
+          
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+      <section class="live-feed" style="margin-top: 0;">
+        <div class="feed-header">
+          <h3>Active Requests Nearby</h3>
+          <span class="live-indicator"></span>
+        </div>
+        <p class="muted-text" style="margin-bottom: 20px;">Requests from others in your area. Disappears when fulfilled.
+        </p>
+
+        <div id="requests-list">
+          <!-- JS will inject request cards here -->
+          <p class="empty-state">No active requests right now. The community is calm.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+      <button class="nav-item" id="nav-dash-btn-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-item active" id="nav-feed-btn-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 18a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2" />
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <circle cx="12" cy="10" r="2" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+        </svg>
+        <span>Live Feed</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- CHAT VIEW -->
+  <div id="chat-view" class="view">
+    <header class="app-header chat-header">
+      <button id="back-to-dash-btn" class="btn btn-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+      </button>
+      <div class="chat-header-info">
+        <h3>Anonymous Chat</h3>
+        <p class="muted-text small" id="chat-request-meta">Library 2F • Urgent</p>
+      </div>
+    </header>
+
+    <div class="chat-messages" id="chat-messages-container">
+      <div class="system-message">
+        <span>Chat started. Messages auto-delete after fulfillment. Keep it discreet.</span>
+      </div>
+      <!-- JS injected messages here -->
+    </div>
+
+    <div class="chat-input-area">
+      <form id="chat-form" class="chat-form">
+        <input type="text" id="chat-input" class="input-field" placeholder="Suggest a drop-off spot..."
+          autocomplete="off">
+        <button type="submit" class="btn btn-primary btn-round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m22 2-7 20-4-9-9-4Z" />
+            <path d="M22 2 11 13" />
+          </svg>
+        </button>
+      </form>
+      <button id="fulfill-btn" class="btn btn-success btn-full margin-top-sm">Request Fulfilled - Send Thanks</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
