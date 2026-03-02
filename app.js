@@ -237,6 +237,10 @@ roleHaveBtn.addEventListener('click', () => {
     switchView('feed');
 });
 
+document.getElementById('back-to-login-btn').addEventListener('click', () => {
+    switchView('auth');
+});
+
 requestForm.addEventListener('submit', createRequest);
 
 backToDashBtn.addEventListener('click', () => {
