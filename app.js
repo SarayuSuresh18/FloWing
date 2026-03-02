@@ -1,22 +1,18 @@
-// FlowLink - Vanilla JS Logic
+// FloWing - Vanilla JS Logic
 // -------------------------------------------------------------------
 
 // Mock Application State
 const state = {
-    user: null, // { uid, alias, isHelper }
+    user: null,
     requests: [],
     currentChatId: null,
 };
 
-// Aliases for anonymity
-const adjectives = ['Quiet', 'Brave', 'Smart', 'Kind', 'Calm', 'Swift'];
-const nouns = ['Library', 'Cafe', 'Office', 'Lab', 'Studio', 'Garden'];
-
-function generateAlias() {
-    const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
-    const noun = nouns[Math.floor(Math.random() * nouns.length)];
-    const num = Math.floor(Math.random() * 99);
-    return `${adj}_${noun}_${num}`;
+function showToast(message = 'Notification sent ✓') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
 }
 
 // -------------------------------------------------------------------
@@ -35,7 +31,6 @@ const views = {
 // Auth Elements
 const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
-const userAliasDisplay = document.getElementById('user-alias-display');
 
 // Role Select Elements
 const roleNeedBtn = document.getElementById('role-need-btn');
@@ -76,12 +71,9 @@ function handleLogin() {
     setTimeout(() => {
         state.user = {
             uid: 'user_' + Date.now(),
-            alias: generateAlias(),
-            isHelper: false
         };
 
         loginBtn.innerHTML = originalText;
-        userAliasDisplay.innerText = state.user.alias;
         switchView('roleSelect');
     }, 600);
 }
@@ -118,6 +110,9 @@ function createRequest(e) {
 
     // Reset form
     requestForm.reset();
+
+    // Show confirmation toast
+    showToast('Notification sent ✓');
 
     renderRequests();
 }
@@ -164,8 +159,12 @@ function renderRequests() {
 function acceptRequest(reqId) {
     const req = state.requests.find(r => r.id === reqId);
     if (!req) return;
+    openChat(req);
+}
 
-    // Transition to chat view
+function openChatById(reqId) {
+    const req = state.requests.find(r => r.id === reqId);
+    if (!req) return;
     openChat(req);
 }
 

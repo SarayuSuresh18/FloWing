@@ -526,6 +526,13 @@ input:checked+.slider:before {
     margin-top: 8px;
 }
 
+.req-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
 /* ------------------------
    Chat View
 ------------------------ */
@@ -663,4 +670,32 @@ input:checked+.slider:before {
 .nav-item.active svg {
     transform: translateY(-2px);
     stroke-width: 2.5;
+}
+
+/* ------------------------
+   Toast Notification
+------------------------ */
+.toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background-color: var(--accent-success);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 9999;
+    white-space: nowrap;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
