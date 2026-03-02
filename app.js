@@ -26,6 +26,7 @@ function generateAlias() {
 // Views
 const views = {
     auth: document.getElementById('auth-view'),
+    roleSelect: document.getElementById('role-select-view'),
     dashboard: document.getElementById('dashboard-view'),
     feed: document.getElementById('feed-view'),
     chat: document.getElementById('chat-view'),
@@ -36,17 +37,15 @@ const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
 const userAliasDisplay = document.getElementById('user-alias-display');
 
+// Role Select Elements
+const roleNeedBtn = document.getElementById('role-need-btn');
+const roleHaveBtn = document.getElementById('role-have-btn');
+
 // Dashboard Elements
 const requestForm = document.getElementById('new-req-form');
 
 // Feed Elements
 const requestsList = document.getElementById('requests-list');
-
-// Nav Elements
-const navDashBtn = document.getElementById('nav-dash-btn');
-const navFeedBtn = document.getElementById('nav-feed-btn');
-const navDashBtn2 = document.getElementById('nav-dash-btn-2');
-const navFeedBtn2 = document.getElementById('nav-feed-btn-2');
 
 // Chat Elements
 const backToDashBtn = document.getElementById('back-to-dash-btn');
@@ -54,7 +53,6 @@ const chatMessagesContainer = document.getElementById('chat-messages-container')
 const chatForm = document.getElementById('chat-form');
 const chatInput = document.getElementById('chat-input');
 const chatMeta = document.getElementById('chat-request-meta');
-const fulfillBtn = document.getElementById('fulfill-btn');
 
 // -------------------------------------------------------------------
 // View Router Methods
@@ -84,15 +82,13 @@ function handleLogin() {
 
         loginBtn.innerHTML = originalText;
         userAliasDisplay.innerText = state.user.alias;
-        renderRequests();
-        switchView('dashboard');
+        switchView('roleSelect');
     }, 600);
 }
 
 function handleLogout() {
-    state.user = null;
-    state.requests = [];
-    switchView('auth');
+    // Go back to role selection so user can switch roles without re-logging in
+    switchView('roleSelect');
 }
 
 // -------------------------------------------------------------------
@@ -149,7 +145,7 @@ function renderRequests() {
 
         card.innerHTML = `
       <div class="req-info">
-        <h4>${req.location} ${isMine ? '(You)' : ''}</h4>
+        <h4>${req.location} ${isMine ? '(Your request)' : ''}</h4>
         <div class="req-meta">
           <span class="tag">${req.type}</span>
           <span class="tag ${isUrgent ? 'urgent-tag' : ''}">${req.urgency}</span>
@@ -157,7 +153,7 @@ function renderRequests() {
             • ${req.timestamp}
           </span>
         </div>
-        ${!isMine ? `<button class="btn btn-outline btn-help" onclick="acceptRequest('${req.id}')">I Have</button>` : `<p class="muted-text small mt-2">Waiting for a helper...</p>`}
+        <button class="btn btn-outline btn-help" onclick="acceptRequest('${req.id}')">I Have</button>
       </div>
     `;
 
@@ -189,7 +185,7 @@ function openChat(request) {
   `;
 
     // Add initial automated message based on context
-    appendMessage(`Hi, I'm nearby and can help. Where exactly are you?`, false);
+    appendMessage(`Hi, Where exactly are you?`, false);
 
     switchView('chat');
 }
@@ -225,30 +221,22 @@ function appendMessage(text, isMine) {
     chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
 }
 
-function handleFulfill() {
-    if (!state.currentChatId) return;
-
-    // Mark request as fulfilled (remove from active feed)
-    const reqIndex = state.requests.findIndex(r => r.id === state.currentChatId);
-    if (reqIndex > -1) {
-        state.requests[reqIndex].status = 'fulfilled';
-    }
-
-    state.currentChatId = null;
-
-    alert("Thank you! Helper karma increased +1 💖");
-
-    // Go back to dashboard and refresh feed
-    renderRequests();
-    switchView('dashboard');
-}
-
 // -------------------------------------------------------------------
 // Event Listeners Initialization
 // -------------------------------------------------------------------
 
 loginBtn.addEventListener('click', handleLogin);
 logoutBtn.addEventListener('click', handleLogout);
+
+roleNeedBtn.addEventListener('click', () => {
+    switchView('dashboard');
+});
+
+roleHaveBtn.addEventListener('click', () => {
+    renderRequests();
+    switchView('feed');
+});
+
 requestForm.addEventListener('submit', createRequest);
 
 backToDashBtn.addEventListener('click', () => {
@@ -257,19 +245,10 @@ backToDashBtn.addEventListener('click', () => {
 });
 
 chatForm.addEventListener('submit', handleChatSubmit);
-fulfillBtn.addEventListener('click', handleFulfill);
 
-// Navigation Listeners
-if (navDashBtn) navDashBtn.addEventListener('click', () => switchView('dashboard'));
-if (navDashBtn2) navDashBtn2.addEventListener('click', () => switchView('dashboard'));
-if (navFeedBtn) navFeedBtn.addEventListener('click', () => {
-    renderRequests();
-    switchView('feed');
-});
-if (navFeedBtn2) navFeedBtn2.addEventListener('click', () => {
-    renderRequests();
-    switchView('feed');
-});
+// Feed Exit -> Role Select
+const feedExitBtn = document.getElementById('feed-exit-btn');
+if (feedExitBtn) feedExitBtn.addEventListener('click', () => switchView('roleSelect'));
 
 // Initialize App State
 switchView('auth');
