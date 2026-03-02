@@ -1,29 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-    /* Soft Pastel Palette inspired by modern female-focused brands */
-    --bg-primary: #fdfaf6;
-    /* Very soft beige */
+    /* Deep Rose & Mauve — vibrant, premium, feminine */
+    --bg-primary: #fef6f7;
+    /* Warm blush white */
     --bg-secondary: #ffffff;
-    --primary-color: #d8b4e2;
-    /* Soft lavender */
-    --primary-hover: #c5a1ce;
-    --secondary-color: #ffc4d9;
-    /* Blush pink */
-    --secondary-hover: #eeb1c7;
-    --text-main: #4a4a4a;
-    /* Soft dark gray for readability without harsh contrast */
-    --text-muted: #8e8e8e;
-    --accent-success: #a3d9a5;
-    /* Soft green */
-    --accent-urgency: #ff9ca8;
-    /* Soft coral/red */
-    --border-color: #f0e6eb;
+    --primary-color: #b5446e;
+    /* Deep rose */
+    --primary-hover: #9c3860;
+    --secondary-color: #e8637a;
+    /* Berry pink */
+    --secondary-hover: #d45268;
+    --text-main: #2d1f26;
+    /* Deep plum-dark for high contrast */
+    --text-muted: #9b7a87;
+    --accent-success: #52b788;
+    /* Verdant green */
+    --accent-urgency: #e8445a;
+    /* Vivid coral-red */
+    --border-color: #f5dde3;
 
     --border-radius: 20px;
     --border-radius-sm: 12px;
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 4px 12px rgba(181, 68, 110, 0.06);
+    --shadow-md: 0 8px 24px rgba(181, 68, 110, 0.1);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -184,13 +184,13 @@ p {
     padding: 16px;
     font-size: 1.1rem;
     font-weight: 600;
-    box-shadow: 0 6px 16px rgba(255, 156, 168, 0.4);
+    box-shadow: 0 6px 16px rgba(232, 68, 90, 0.35);
 }
 
 .btn-emergency:hover {
-    background-color: #ff8795;
+    background-color: #d43550;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 156, 168, 0.5);
+    box-shadow: 0 8px 20px rgba(232, 68, 90, 0.45);
 }
 
 .btn-emergency:active {
@@ -269,7 +269,7 @@ p {
 .select-field:focus {
     border-color: var(--primary-color);
     background-color: #fff;
-    box-shadow: 0 0 0 4px rgba(216, 180, 226, 0.15);
+    box-shadow: 0 0 0 4px rgba(181, 68, 110, 0.12);
 }
 
 /* ------------------------
@@ -349,8 +349,8 @@ p {
 }
 
 .user-badge {
-    background-color: rgba(216, 180, 226, 0.2);
-    color: #8c5d99;
+    background-color: rgba(181, 68, 110, 0.12);
+    color: #b5446e;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.85rem;
